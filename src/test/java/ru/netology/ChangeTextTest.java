@@ -32,33 +32,26 @@ public class ChangeTextTest {
 
     @Test
     public void testChangeTextWithEmpty() {
-        MobileElement el1 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/buttonChange");
-        el1.click();
-        MobileElement els1 = (MobileElement) driver.findElementById("textToBeChanged");
+        MainScreen mainScreen = new MainScreen(driver);
+        mainScreen.changeButton.click();
+        Assertions.assertEquals("Hello UiAutomator!", mainScreen.textToBeChanged.getText());
 
-        Assertions.assertEquals("Hello UiAutomator!", els1.getText());
     }
 
     @Test
     public void testChangeTextWithSpace() {
-        MobileElement el2 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/userInput");
-        el2.sendKeys(" ");
-        MobileElement el3 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/buttonChange");
-        el3.click();
-        MobileElement els1 = (MobileElement) driver.findElementById("textToBeChanged");
-
-        Assertions.assertEquals("Hello UiAutomator!", els1.getText());
+        MainScreen mainScreen = new MainScreen(driver);
+        mainScreen.userInputField.sendKeys(" ");
+        mainScreen.changeButton.click();
+        Assertions.assertEquals("Hello UiAutomator!", mainScreen.textToBeChanged.getText());
     }
 
     @Test
     public void testChangeTextInNewActivity() {
-        MobileElement el1 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/userInput");
-        el1.sendKeys(textToSet);
-        MobileElement el2 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/buttonActivity");
-        el2.click();
-        MobileElement els2 = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.TextView");
-
-        Assertions.assertEquals(textToSet, els2.getText());
+        MainScreen mainScreen = new MainScreen(driver);
+        mainScreen.userInputField.sendKeys(textToSet);
+        mainScreen.activityButton.click();
+        Assertions.assertEquals(textToSet, mainScreen.textField.getText());
     }
 
     @AfterAll
